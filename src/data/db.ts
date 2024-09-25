@@ -15,7 +15,7 @@ export class DatabaseService {
 
     //check the database file, if it doesn't exist, create it
     connectToDatabase() {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             if (!fs.existsSync(this.dataPath)) {
                 resolve(this.writeData({}))
             } else

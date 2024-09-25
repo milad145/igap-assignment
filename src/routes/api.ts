@@ -2,7 +2,7 @@ import express, {Request, Response} from "express"
 
 let router = express.Router();
 
-import {setErrorResponse, setResponseCode} from '../utils/utility'
+import {setErrorResponse} from '../utils/utility'
 import {createCollection} from '../core/application'
 
 //*********************** POST ***********************//
