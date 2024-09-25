@@ -1,0 +1,30 @@
+{
+  "name": "igap-assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "start": "node build/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/milad145/igap-assignment.git"
+  },
+  "author": "Milad Aslani",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/milad145/igap-assignment/issues"
+  },
+  "homepage": "https://github.com/milad145/igap-assignment#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.21"
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.4.4",
+    "@types/js-yaml": "^4.0.9",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "js-yaml": "^4.1.0"
+  }
+}
