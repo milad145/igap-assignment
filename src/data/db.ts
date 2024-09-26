@@ -28,9 +28,79 @@ export class DatabaseService {
         return new Promise((resolve, reject) => {
             const data = this.readData();
             if (data[tableName])
-                reject('Collection already exists');
-            data[tableName] = [];
-            resolve(this.writeData(data))
+                reject('Collection already exists!');
+            else {
+                data[tableName] = [];
+                resolve(this.writeData(data))
+            }
+        })
+    }
+
+    // delete collection by name
+    deleteCollection(tableName: string) {
+        return new Promise((resolve, reject) => {
+            const data = this.readData();
+            if (data[tableName]) {
+                delete data[tableName]
+                resolve(this.writeData(data))
+            } else
+                reject("Collection doesn't exists!")
+        })
+    }
+
+    // add record to collection
+    addRecord(tableName: string, record: { foo: string, bar: string, baz: number }) {
+        return new Promise((resolve, reject) => {
+            const data = this.readData();
+            if (data[tableName]) {
+                let index = data[tableName].findIndex((d: any) => d.baz === record.baz)
+                if (index === -1) {
+                    data[tableName].push(record)
+                    resolve(this.writeData(data))
+                } else
+                    reject(new Error("Duplicated record! 'baz' have to be unique!"))
+            } else
+                reject(new Error("Collection doesn't exists!"))
+        })
+    }
+
+    getRecords(tableName: string, limit: number, skip: number) {
+        return new Promise((resolve, reject) => {
+            const data = this.readData();
+            if (data[tableName]) {
+                resolve(data[tableName].slice(skip, skip + limit))
+            } else
+                reject("Collection doesn't exists!")
+        })
+    }
+
+    deleteRecord(tableName: string, baz: number) {
+        return new Promise((resolve, reject) => {
+            const data = this.readData();
+            if (data[tableName]) {
+                let index = data[tableName].findIndex((d: any) => d.baz === baz)
+                if (index !== -1) {
+                    data[tableName].splice(index, 1)
+                    resolve(this.writeData(data))
+                } else
+                    reject(new Error("Record doesn't exists at this collection!"))
+            } else
+                reject("Collection doesn't exists!")
+        })
+    }
+
+    updateRecord(tableName: string, baz: number, record: { foo?: string, bar?: string }) {
+        return new Promise((resolve, reject) => {
+            const data = this.readData();
+            if (data[tableName]) {
+                let index = data[tableName].findIndex((d: any) => d.baz === baz)
+                if (index !== -1) {
+                    data[tableName][index] = {...data[tableName][index], ...record}
+                    resolve(this.writeData(data))
+                } else
+                    reject(new Error("Record doesn't exists at this collection!"))
+            } else
+                reject(new Error("Collection doesn't exists!"))
         })
     }
 
