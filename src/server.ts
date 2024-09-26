@@ -30,8 +30,8 @@ function initiateServer() {
     let server = http.createServer({}, app);
 
     server
-        .listen(process.env.port, () => {
-            console.log('Express HTTPS server listening on port %d!', process.env.port)
+        .listen(process.env.LISTENING_PORT, () => {
+            console.log('Express HTTPS server listening on port %d!', process.env.LISTENING_PORT)
         })
         .on('error', function (err: Error) {
             console.error("HTTPS server error:", err.message);
