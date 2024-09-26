@@ -53,7 +53,7 @@ npm run dev
 
 The server will start at http://localhost:3000.
 
-### Project Structure
+## Project Structure
 ```
 .
 ├── src
@@ -69,7 +69,7 @@ The server will start at http://localhost:3000.
 └── README.md           # Project documentation
 ```
 
-### Testing
+## Testing
 Use the provided Postman collection (`igap.postman_collection.json`) to test the API endpoints.
 
 
