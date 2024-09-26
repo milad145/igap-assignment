@@ -2,6 +2,8 @@
 
 **IGAP** is a simple API management system built with Node.js, Express, and TypeScript. It allows users to manage collections (tables) and records with CRUD operations.
 
+you can have access to [Application Architecture Document](./architecture.md) 
+
 ## Features
 
 - Create, Read, Update, and Delete (CRUD) operations on collections and records
@@ -18,6 +20,7 @@ Before you begin, ensure you have the following installed on your local machine:
 - [Node.js](https://nodejs.org/) (version 14.x or higher)
 - [npm](https://www.npmjs.com/) (version 6.x or higher)
 - [TypeScript](https://www.typescriptlang.org/) (version 4.x or higher)
+
 
 ## Getting Started
 
