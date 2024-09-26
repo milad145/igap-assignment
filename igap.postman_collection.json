@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "521df9f4-3c8a-41e4-ba05-9de50f08adf3",
+		"name": "igap",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "948470"
+	},
+	"item": [
+		{
+			"name": "02 - delete table",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tableName\":\"third-table\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/table",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"table"
+					]
+				},
+				"description": "For deleting specefic table you need to pass the table-name in body"
+			},
+			"response": []
+		},
+		{
+			"name": "01 - create table",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tableName\":\"first-table\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/create",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"create"
+					]
+				},
+				"description": "For creating new table you need to pass the table-name in body"
+			},
+			"response": []
+		},
+		{
+			"name": "03 - add record",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"foo\":\"test\",\n    \"bar\":\"bar\",\n    \"baz\":10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/record/forth-table",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"record",
+						"forth-table"
+					]
+				},
+				"description": "For inserting new record inside of specific table you need to pass the table-name in url and blow parameters in body\n\n- foo (required)\n    \n- bar (required)\n    \n- baz (required and have to be unique)"
+			},
+			"response": []
+		},
+		{
+			"name": "04 - record list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/records/forth-table?limit=5&skip=0",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"records",
+						"forth-table"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "5"
+						},
+						{
+							"key": "skip",
+							"value": "0"
+						}
+					]
+				},
+				"description": "To get a list of records of specific table you need to pass the table-name in query. you can send blow parameters too.\n\n- limit (optional)\n- skip (optional)"
+			},
+			"response": []
+		},
+		{
+			"name": "06 - delete record",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/record/forth-table/9",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"record",
+						"forth-table",
+						"9"
+					]
+				},
+				"description": "For deleting a specific record of a table you need to pass the table-name and the baz of record in url"
+			},
+			"response": []
+		},
+		{
+			"name": "05 - update record",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"foo\":\"foo\",\n    \"bar\":\"test-bar\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/record/first-table/143351",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"record",
+						"first-table",
+						"143351"
+					]
+				},
+				"description": "For updating of a specific record you have to pass the table-name and baz of record in url and also blow parameters as body\n\n- foo (optional)\n    \n- bar (optional)"
+			},
+			"response": []
+		}
+	]
+}
