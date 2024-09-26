@@ -105,7 +105,7 @@ export class DatabaseService {
     }
 
     // Read data from the file
-    private readData(): Record<string, any> {
+    private readData(): any {
         try {
             if (!fs.existsSync(this.dataPath)) return {};
             const fileContent = fs.readFileSync(this.dataPath, 'utf-8');
@@ -116,7 +116,7 @@ export class DatabaseService {
     }
 
     // Write data to the file
-    private writeData(data: Record<string, any>) {
+    private writeData(data: any) {
         return new Promise((resolve, reject) => {
             try {
                 const content = this.storageType === 'yaml' ? yaml.dump(data) : JSON.stringify(data, null, 2);
