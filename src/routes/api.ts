@@ -65,7 +65,7 @@ router.put("/record/:tableName/:recordBaz", async (req: Request, res: Response) 
 //*********************** DELETE ***********************//
 router.delete('/table', async (req: Request, res: Response) => {
     let {tableName} = req.body;
-    if (typeof tableName === "string" && tableName.length > 0) {
+    if (typeof tableName === "string") {
         try {
             let result = await application.deleteCollection(tableName)
             res.json({result})
