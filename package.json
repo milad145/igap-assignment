@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "watch": "tsc -w",
-    "build" : "tsc",
+    "build": "tsc",
     "dev": "node build/server.js"
   },
   "repository": {
@@ -24,8 +24,12 @@
   "dependencies": {
     "@nestjs/common": "^10.4.4",
     "@types/js-yaml": "^4.0.9",
+    "@types/msgpack5": "^3.4.6",
+    "@types/yargs": "^17.0.33",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "msgpack5": "^6.0.2",
+    "yargs": "^17.7.2"
   }
 }
