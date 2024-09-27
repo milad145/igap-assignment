@@ -100,8 +100,12 @@ router.get('/records/:tableName', async (req: Request, res: Response) => {
     let {limit, skip} = req.query
     const limitNumber: number = (typeof limit === 'string' && Number(limit) > 0) ? parseInt(limit) : 10;
     const skipNumber: number = (typeof skip === "string" && Number(skip) > 0) ? parseInt(skip) : 0;
-    let result = await application.getRecords(tableName, limitNumber, skipNumber)
-    res.json({result})
+    try {
+        let result = await application.getRecords(tableName, limitNumber, skipNumber)
+        res.json({result})
+    } catch (err) {
+        setErrorResponse(req, res, err as Error)
+    }
 })
 
 export default router;
