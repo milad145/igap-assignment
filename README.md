@@ -41,6 +41,12 @@ Copy the `.env-sample` to `.env` and configure your environment variables:
 cp .env-sample .env
 ```
 You can modify the environment variables to suit your local setup.
+You can modify the environment variables to suit your local setup. The key variable options are:
+
+* **SDD_STORE_TYPE:** Determines the format of data storage (e.g., `json`, `yaml`).
+* **LISTENING_PORT:** The port on which the server will run (default is `3000`).
+* **BINARY_DATA_STORAGE:** Set to `true` to enable binary data storage using MessagePack.
+
 
 ### 4. Compile TypeScript
 Since the project is written in TypeScript, it needs to be compiled into JavaScript before running:
@@ -55,6 +61,33 @@ npm run dev
 ```
 
 The server will start at http://localhost:3000.
+
+## CLI Usage
+The project includes a Command-Line Interface (CLI) for interacting with the database. You can perform the following operations:
+
+### 1. Add a Record
+To add a record to a table:
+```bash
+node build/cli.js add --table table-name --record '{ "foo": "bar", "baz": 1 }'
+```
+
+### 2. Delete a Record
+To delete a record from a table by its `baz` value:
+```bash
+node build/cli.js del --table table-name --baz 1
+```
+
+### 3. Get Records
+To retrieve all records from a specified table:
+```bash
+node build/cli.js get --table table-name
+```
+
+### Command Descriptions
+* **add:** Adds a new record to the specified table. Requires the `--table` option for the table name and `--record` option for the record in JSON format.
+* **del:** Deletes a record from the specified table based on the `baz` value. Requires the `--table` option for the table name and `--baz` option for the record's baz value.
+* **get:** Retrieves all records from the specified table. Requires the `--table` option for the table name.
+
 
 ## Project Structure
 ```
