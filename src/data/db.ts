@@ -1,16 +1,22 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
+import msgpack from 'msgpack5';
+
+const msgpackInstance = msgpack();
+
 
 export class DatabaseService {
     private storageType: string = process.env.SDD_STORE_TYPE || 'json';
     private dataPath: string = path.join(__dirname, 'data.json');
+    private binaryDataStorage: Boolean = process.env.BINARY_DATA_STORAGE === 'true'
 
 
     constructor() {
-        if (this.storageType === 'yaml') {
+        if (this.binaryDataStorage)
+            this.dataPath = path.join(__dirname, 'data.db');
+        else if (this.storageType === 'yaml')
             this.dataPath = path.join(__dirname, 'data.yaml');
-        }
     }
 
     //check the database file, if it doesn't exist, create it
@@ -108,8 +114,13 @@ export class DatabaseService {
     private readData(): any {
         try {
             if (!fs.existsSync(this.dataPath)) return {};
-            const fileContent = fs.readFileSync(this.dataPath, 'utf-8');
-            return this.storageType === 'yaml' ? yaml.load(fileContent) : JSON.parse(fileContent);
+            if (this.binaryDataStorage) {
+                const binaryData = fs.readFileSync(this.dataPath);
+                return msgpackInstance.decode(binaryData);  // Deserialize from binary
+            } else {
+                const fileContent = fs.readFileSync(this.dataPath, 'utf-8');
+                return this.storageType === 'yaml' ? yaml.load(fileContent) : JSON.parse(fileContent);
+            }
         } catch (e) {
             throw e
         }
@@ -119,7 +130,12 @@ export class DatabaseService {
     private writeData(data: any) {
         return new Promise((resolve, reject) => {
             try {
-                const content = this.storageType === 'yaml' ? yaml.dump(data) : JSON.stringify(data, null, 2);
+                let content: any
+                if (this.binaryDataStorage) {
+                    content = msgpackInstance.encode(data);  // Serialize to binary
+                } else {
+                    content = this.storageType === 'yaml' ? yaml.dump(data) : JSON.stringify(data, null, 2);
+                }
                 fs.writeFileSync(this.dataPath, content)
                 resolve(true)
             } catch (e) {
